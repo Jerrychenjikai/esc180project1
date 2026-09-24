@@ -30,15 +30,18 @@ increase by 0.25°C per minute, while the battery charge will not increase furth
 
 def get_cur_temp():
     #This function returns the current temperature of the battery, as a float
+    
     pass
 
 def get_cur_charge():
     #This function returns the current charge level of the battery, as a float.
+    
     pass
 
 def get_cur_battery_health():
     #This function returns the health of the battery, as a boolean. It returns True if the battery is in
     #good health and False if the battery is in bad health.
+    
     pass
 
 def duration_fast_charge_possible():
@@ -59,11 +62,13 @@ def charge_time_needed(minutes):
     #charge now to have sufficient battery for minutes use duration? If the battery already has
     #sufficient charge, return 0. If it is impossible for the battery in its current state to be charged to a
     #point where usage for minutes duration can be performed, return None
+    
     pass
 
 def initialize():
     #This function initializes all the global variables in the program. The following code should run
     #two independent simulations, with both SIMULATION 1 and SIMULATION 2 starting from the
     #beginning.
+    
     pass
 
