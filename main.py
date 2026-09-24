@@ -42,6 +42,7 @@ increase by 0.25°C per minute, while the battery charge will not increase furth
 temp = 20.0
 charge = 50.0
 health = True
+time_elapsed = 0
 
 def get_cur_temp():
     #This function returns the current temperature of the battery, as a float
@@ -64,16 +65,32 @@ def get_cur_battery_health():
 
 def duration_fast_charge_possible():
     #This function returns the duration for which fast charge is possible based on the current battery
-    #health, temperature, and charge as a starting point.
+    #health, temperature, and charge as a starting point
 
-    pass
+    global temp
+    global charge
+    global health
+
+    charge_time = (80 - charge)/3
+    temp_time = (40 - temp)/0.5
+
+    charge_time = max(charge_time , 0)
+    temp_time = max(temp_time, 0)
+
+    return health * min(charge_time, temp_time)
+    
 
 def simulate_activity(activity, duration):
     #This function simulates the battery performing the activity for duration minutes. Assume
     #duration is a positive int. If the activity is not one of “charge”, “use”, or “idle”, running the
     #function should have no effect.
 
-    pass
+    if activity == "charge":
+        pass
+    elif activity == "use":
+        pass
+    elif activity == "idle":
+        pass
 
     
 def charge_time_needed(minutes):
@@ -93,10 +110,12 @@ def initialize():
     global temp
     global charge
     global health
+    global time_elapsed
 
     temp = 20.0
     charge = 50.0
     health = True
+    time_elapsed = 0
 
 if __name__=="__main__":
     print("hello world")
