@@ -1,6 +1,3 @@
-print("Hello world")
-print("Hello again")
-
 """
 The following rules apply to how the battery charge, temperature and health are updated:
 
@@ -44,6 +41,10 @@ if the battery switches to a bad health state and is at or above 90%: the temper
 increase by 0.25°C per minute, while the battery charge will not increase further.
 """
 
+temp = 20.0
+charge = 50.0
+health = True
+
 def get_cur_temp():
     #This function returns the current temperature of the battery, as a float
     
@@ -86,5 +87,14 @@ def initialize():
     #two independent simulations, with both SIMULATION 1 and SIMULATION 2 starting from the
     #beginning.
     
-    pass
+    global temp
+    global charge
+    global health
+
+    temp = 20.0
+    charge = 50.0
+    health = True
+
+if __name__=="__main__":
+    print("hello world")
 
