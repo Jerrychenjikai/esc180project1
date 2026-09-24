@@ -8,12 +8,10 @@ health, at 50% charge and at 20°C temperature.
 
 • Charging can be fast or slow. Fast charging increases the charge by 3% per minute, slow
 charging by 1% per minute.
-
-• Fast charging occurs when the temperature is between 0-40°C, battery charge is below
-80%, and battery health is good.
-
 • Slow charging increases the temperature by 0.25°C per minute. Fast charging increases
 the temperature by 0.5°C per minute.
+• Fast charging occurs when the temperature is between 0-40°C, battery charge is below
+80%, and battery health is good.
 
 • If fast charging is possible, it will occur. Charging can switch from fast to slow charging
 in a single session.
@@ -67,6 +65,7 @@ def get_cur_battery_health():
 def duration_fast_charge_possible():
     #This function returns the duration for which fast charge is possible based on the current battery
     #health, temperature, and charge as a starting point.
+
     pass
 
 def simulate_activity(activity, duration):
@@ -76,6 +75,7 @@ def simulate_activity(activity, duration):
 
     pass
 
+    
 def charge_time_needed(minutes):
     #This function returns the duration needed for charging to enable use for a specific activity
     #duration of minutes afterwards. Based on a future journey, how long does the battery need to
