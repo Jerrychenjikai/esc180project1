@@ -2,7 +2,24 @@ print("Hello world")
 print("Hello again")
 
 """
-ESC180 Project #1 – Battery Simulator Fall 2026
+The following rules apply to how the battery charge, temperature and health are updated:
+
+• Initial battery charge is set by the initialize() function. Battery begins in good
+health, at 50% charge and at 20°C temperature.
+
+• The battery is always charging, being used, or sitting idle.
+
+• Charging can be fast or slow. Fast charging increases the charge by 3% per minute, slow
+charging by 1% per minute.
+
+• Fast charging occurs when the temperature is between 0-40°C, battery charge is below
+80%, and battery health is good.
+
+• Slow charging increases the temperature by 0.25°C per minute. Fast charging increases
+the temperature by 0.5°C per minute.
+
+• If fast charging is possible, it will occur. Charging can switch from fast to slow charging
+in a single session.
 
 • Usage discharges the battery by 2% per minute. Temperature increases by 1°C per minute
 during usage.
@@ -26,7 +43,6 @@ logic applies to if the battery is in a bad health state and reaches 80% during 
 if the battery switches to a bad health state and is at or above 90%: the temperature will
 increase by 0.25°C per minute, while the battery charge will not increase further.
 """
-
 
 def get_cur_temp():
     #This function returns the current temperature of the battery, as a float
