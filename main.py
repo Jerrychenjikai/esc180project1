@@ -48,18 +48,21 @@ health = True
 def get_cur_temp():
     #This function returns the current temperature of the battery, as a float
     
-    pass
+    global temp
+    return float(temp)
 
 def get_cur_charge():
     #This function returns the current charge level of the battery, as a float.
     
-    pass
+    global charge
+    return float(charge)
 
 def get_cur_battery_health():
     #This function returns the health of the battery, as a boolean. It returns True if the battery is in
     #good health and False if the battery is in bad health.
     
-    pass
+    global health
+    return health
 
 def duration_fast_charge_possible():
     #This function returns the duration for which fast charge is possible based on the current battery
