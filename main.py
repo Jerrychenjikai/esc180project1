@@ -86,6 +86,32 @@ def simulate_activity(activity, duration):
     #function should have no effect.
 
     if activity == "charge":
+        global health
+        global temp
+        global charge
+        if activity == "charge":
+            if health is True and temp <= 40 and charge <= 80:
+                charge_time = duration_fast_charge_possible()
+                duration = duration - charge_time
+                charge = charge + charge_time * 3
+                temp = temp + charge_time * 0.5
+            if health is True:
+                if charge <= 100:
+                charge = charge + duration
+                if charge > 100:
+                charge = 100
+                temp = temp + 0.25 * duration
+            
+            if health is False and 80 < charge <=100:
+                temp = temp + 0.25 * duration
+        
+            if health is False:
+                if charge <= 80:
+                    charge = charge + duration
+                if charge > 80:
+                    charge = 80
+                temp = temp + 0.25 * duration
+            
         pass
     elif activity == "use":
         pass
