@@ -166,6 +166,23 @@ def simulate_activity(activity, duration):
 
         # 注意：在此处需要补充触发“电量>=90%衰减健康度”的检测逻辑        
     elif activity == "use":
+        
+        if charge - duration * 2 >= 0:
+            charge -= duration * 2
+            temp += duration * 1
+        elif charge - duration * 2 < 0:
+            for i in range(1,duration + 1):
+                charge -= 2
+                temp += 1
+                if charge <= 0:
+                    charge = 0 # To prevent if the initial charge is odd number
+                    instant_charge_0 = i
+                    break
+            
+            time_left_cooling = duration - instant_charge_0    
+            temp = temp - time_left_cooling * 1
+        if temp < 0:
+            temp = 0
         pass
     elif activity == "idle":
         pass
