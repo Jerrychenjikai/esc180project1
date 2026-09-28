@@ -126,7 +126,7 @@ def simulate_activity(activity, duration):
         
         # 1. 尝试快充 (Fast Charging)
         # fast charging cannot reach 90%, so no need to consider overcharge
-        if health is True and temp < 40 and charge < 80:
+        if health is True and temp <= 40 and charge < 80:
             max_fast_time = duration_fast_charge_possible()
             fast_time = min(time_left, max_fast_time)
             
@@ -164,28 +164,28 @@ def simulate_activity(activity, duration):
                 max_charge_reached(time_left)
                 time_left = 0
 
-        # 注意：在此处需要补充触发“电量>=90%衰减健康度”的检测逻辑        
     elif activity == "use":
         
         if charge - duration * 2 >= 0:
             charge -= duration * 2
             temp += duration * 1
-        elif charge - duration * 2 < 0:
-            for i in range(1,duration + 1):
-                charge -= 2
-                temp += 1
-                if charge <= 0:
-                    charge = 0 # To prevent if the initial charge is odd number
-                    instant_charge_0 = i
-                    break
+        else:
+            max_time_possible = charge / 2
+            charge = 0
+            temp += max_time_possible
+            temp -= (duration - max_time_possible)
             
-            time_left_cooling = duration - instant_charge_0    
-            temp = temp - time_left_cooling * 1
         if temp < 0:
             temp = 0
-        pass
     elif activity == "idle":
-        pass
+        temp -= duration
+        
+        if charge - duration * 0.5 >= 0:
+            charge -= duration * 0.5
+        else:
+            charge = 0            
+        if temp < 0:
+            temp = 0
 
     
 def charge_time_needed(minutes):
