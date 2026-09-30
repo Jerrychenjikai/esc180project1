@@ -201,7 +201,7 @@ def charge_time_needed(minutes):
     current_charge = charge
     if current_charge >= minutes * 2:
         return 0
-    elif current_charge < minutes * 2:
+    else:
         if minutes * 2 - current_charge > 80 and health is False:
             return None
         elif minutes * 2 - current_charge > 100:
@@ -229,8 +229,6 @@ def charge_time_needed(minutes):
             return(charging_time_needed)
            
     
-    pass
-
 def initialize():
     #This function initializes all the global variables in the program. The following code should run
     #two independent simulations, with both SIMULATION 1 and SIMULATION 2 starting from the
