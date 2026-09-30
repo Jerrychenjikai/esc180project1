@@ -147,7 +147,7 @@ def simulate_activity(activity, duration):
                 time_left -= charging_time
 
             if charge >= 90:
-                instant_at_90 = time_elapsed - time_left - (charge - 90) / 1.0
+                instant_at_90 = time_elapsed - time_left 
                 instant_at_90 = max(instant_at_90, time_elapsed - duration) #if the battery starts over 90%, then the instant over 90 is at the start of the charging process
                 update_overcharge_record(instant_at_90)
 
@@ -194,6 +194,40 @@ def charge_time_needed(minutes):
     #charge now to have sufficient battery for minutes use duration? If the battery already has
     #sufficient charge, return 0. If it is impossible for the battery in its current state to be charged to a
     #point where usage for minutes duration can be performed, return None
+    global charge
+    global temp
+    global health
+    
+    current_charge = charge
+    if current_charge >= minutes * 2:
+        return 0
+    elif current_charge < minutes * 2:
+        if minutes * 2 - current_charge > 80 and health is False:
+            return None
+        elif minutes * 2 - current_charge > 100:
+            return None 
+        charging_time_needed = minutes * 2 - charge   
+        if health is False:
+            return(charging_time_needed)
+                   
+        current_charge = 0
+        if health is True and temp <= 40 and current_charge < 80:
+            
+            charge_time = (80 - current_charge)/3
+            temp_time = (40 - temp)/0.5
+
+            charge_time = max(charge_time , 0)
+            temp_time = max(temp_time, 0)
+            
+            
+            fast_time = min(charge_time,temp_time)
+            charging_time_needed -= fast_time
+            if charging_time_needed <= 0:
+                return(fast_time)
+            
+        if health is True:
+            return(charging_time_needed)
+           
     
     pass
 
