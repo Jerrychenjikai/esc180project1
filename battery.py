@@ -212,9 +212,9 @@ def charge_time_needed(minutes):
             return(charging_time_needed)
 
         target_charge = minutes * 2 - charge
-            if target_charge > 80:
-                time_for_slow_charge = target_charge - 80 #Fast to slow charge 
-                target_charge = 80
+        if target_charge > 80:
+            time_for_slow_charge = target_charge - 80 #Fast to slow charge 
+            target_charge = 80
                 
         if health is True and temp <= 40 and target_charge <= 80:
 
@@ -227,7 +227,7 @@ def charge_time_needed(minutes):
             
             fast_time = min(charge_time,temp_time)
             if fast_time * 3 + time_for_slow_charge * 1 < target_charge: #if temp reaches limit first
-                time_for_slow_charge = target_charge - fast_time * 3
+                time_for_slow_charge += target_charge - fast_time * 3
                 
             return(fast_time + time_for_slow_charge)
 
