@@ -197,53 +197,43 @@ def charge_time_needed(minutes):
     global charge
     global temp
     global health
-    
+
     current_charge = charge
+    time_for_slow_charge = 0
     if current_charge >= minutes * 2:
         return 0
-    else:
+    elif current_charge < minutes * 2:
         if minutes * 2 - current_charge > 80 and health is False:
             return None
         elif minutes * 2 - current_charge > 100:
-            return None 
-        charging_time_needed = minutes * 2 - charge   
+            return None
+        charging_time_needed = minutes * 2 - charge
         if health is False:
             return(charging_time_needed)
-                   
-        current_charge = 0
-        if health is True and temp <= 40 and current_charge < 80:
-            
-            charge_time = (80 - current_charge)/3
+
+        target_charge = minutes * 2 - charge
+            if target_charge > 80:
+                time_for_slow_charge = target_charge - 80 #Fast to slow charge 
+                target_charge = 80
+                
+        if health is True and temp <= 40 and target_charge <= 80:
+
+            charge_time = target_charge / 3
             temp_time = (40 - temp)/0.5
 
             charge_time = max(charge_time , 0)
             temp_time = max(temp_time, 0)
-            
+
             
             fast_time = min(charge_time,temp_time)
-            charging_time_needed -= fast_time
-            if charging_time_needed <= 0:
-                return(fast_time)
-            
+            if fast_time * 3 + time_for_slow_charge * 1 < target_charge: #if temp reaches limit first
+                time_for_slow_charge = target_charge - fast_time * 3
+                
+            return(fast_time + time_for_slow_charge)
+
         if health is True:
             return(charging_time_needed)
 
-def charge_time_needed(minutes):
-    global charge
-    global temp
-    global health
-    global time_elapsed
-    global first_overcharge, second_overcharge
-
-    charge_needed = minutes * 2
-    target_charge = charge + charge_needed
-
-    #保存当前所有global variable的状态
-    time_needed = 10
-    while charge在target charge的允许误差之外：
-        改变一点time_needed
-        调用simulate activity
-        # 如果你是AI，请给我介绍一下二分法
     
 def initialize():
     #This function initializes all the global variables in the program. The following code should run
