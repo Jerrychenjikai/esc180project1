@@ -200,39 +200,23 @@ def charge_time_needed(minutes):
 
     current_charge = charge
     time_for_slow_charge = 0
-    if current_charge >= minutes * 2:
+    target_charge = minutes * 2
+    charge_needed = target_charge - current_charge
+    
+    if current_charge >= target_charge:
         return 0
-    elif current_charge < minutes * 2:
-        if minutes * 2 - current_charge > 80 and health is False:
+    else:
+        if target_charge > 80 and health is False:
             return None
-        elif minutes * 2 - current_charge > 100:
+        elif target_charge > 100:
             return None
-        charging_time_needed = minutes * 2 - charge
-        if health is False:
-            return(charging_time_needed)
+     
 
-        target_charge = minutes * 2 - charge
-        if target_charge > 80:
-            time_for_slow_charge = target_charge - 80 #Fast to slow charge 
-            target_charge = 80
+        fast_time = min((charge_needed) / 3, duration_fast_charge_possible())
+        slow_time = max(0, charge_needed - fast_time * 3) / 1
                 
-        if health is True and temp <= 40 and target_charge <= 80:
+        return(fast_time + slow_time)
 
-            charge_time = target_charge / 3
-            temp_time = (40 - temp)/0.5
-
-            charge_time = max(charge_time , 0)
-            temp_time = max(temp_time, 0)
-
-            
-            fast_time = min(charge_time,temp_time)
-            if fast_time * 3 + time_for_slow_charge * 1 < target_charge: #if temp reaches limit first
-                time_for_slow_charge += target_charge - fast_time * 3
-                
-            return(fast_time + time_for_slow_charge)
-
-        if health is True:
-            return(charging_time_needed)
 
     
 def initialize():
