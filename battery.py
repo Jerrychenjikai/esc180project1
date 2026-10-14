@@ -238,6 +238,49 @@ def initialize():
     first_overcharge = -9999999999
     second_overcharge = -9999999999
 
-if __name__=="__main__":
-    print("hello world")
+if __name__ == '__main__':
+    initialize()
+
+    print(duration_fast_charge_possible()) # 10
+    print(charge_time_needed(50)) # 30
+
+    simulate_activity("charge",30)
+    print(get_cur_charge()) # 100
+    print(get_cur_temp()) # 30
+
+    simulate_activity("use",50)
+    print(get_cur_charge()) # 0
+    print(get_cur_temp()) # 80
+
+    simulate_activity("use",10)
+    print(get_cur_charge()) # 0
+    print(get_cur_temp()) # 70
+
+    simulate_activity("charge",100)
+    print(get_cur_charge()) # 100
+    print(get_cur_temp()) # 95
+
+    simulate_activity("idle",100)
+    print(get_cur_charge()) # 50
+    print(get_cur_temp()) # 0
+    print(get_cur_battery_health()) # True
+    print(duration_fast_charge_possible()) # 10
+
+    simulate_activity("charge",80)
+    print(get_cur_charge()) # 90
+    print(get_cur_temp()) # 22.5
+    print(get_cur_battery_health()) # False
+
+    simulate_activity("use",40)
+    print(get_cur_charge()) # 10
+    print(get_cur_temp()) # 62.5
+
+    simulate_activity("charge",80)
+    print(get_cur_charge()) # 80
+    print(get_cur_temp()) # 82.5
+
+    initialize()
+    # add your tests here
+
+
 
