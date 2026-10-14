@@ -140,7 +140,7 @@ def simulate_activity(activity, duration):
             if charge < target_max_charge:
                 # 计算充到上限还需要多长时间
                 # overcharge will only happen here
-                time_to_full = (target_max_charge - charge) / 1.0  # 慢充 1%/min
+                time_to_full = (target_max_charge - charge) / 1.0
                 charging_time = min(time_left, time_to_full)
                 
                 slow_charge(charging_time)
